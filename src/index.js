@@ -1,21 +1,22 @@
-import 'babel-polyfill';
-import React, { Component} from 'react';
-import ReactDOM from 'react-dom';
-import { applyMiddleware, createStore } from 'redux';
-import sagaMiddleware from 'redux-saga'
+import 'babel-polyfill'
+import React, { Component} from 'react'
+import ReactDOM from 'react-dom'
+import { applyMiddleware, createStore } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux'
-import * as Timer from './timer';
+import * as timer from './timer'
 
-const createStoreWithMiddleware = applyMiddleware(
-  sagaMiddleware(...Timer.sagas)
-)(createStore);
+const sagaMiddleware = createSagaMiddleware()
+const createStoreWithMiddleware = applyMiddleware(sagaMiddleware)(createStore)
 
-const store = createStoreWithMiddleware(Timer.reducer);
+const store = createStoreWithMiddleware(timer.reducer)
 
 const Root = () => (
   <Provider store={store}>
-    <Timer.View/>
+    <timer.View/>
   </Provider>
-);
+)
 
-ReactDOM.render(<Root/>, document.getElementById('root'));
+sagaMiddleware.run(timer.saga)
+
+ReactDOM.render(<Root/>, document.getElementById('root'))

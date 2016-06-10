@@ -1,21 +1,17 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
+import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Timer } from './components'
+import * as actions from './actions'
+import { getFormattedTime, getStatus } from './reducer'
 
-import { Timer } from './components';
-import actions from './actions';
-import reducer from './reducer';
-import sagas from './sagas';
+export reducer from './reducer'
+export saga from './saga'
 
-const mapStateToProps = state => ({ state });
-
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-
-const View = connect(mapStateToProps, mapDispatchToProps)(Timer);
-
-export { actions
-       , reducer
-       , sagas
-       , View
-       };
-
+export const View = connect(
+  state => ({
+    time: getFormattedTime(state),
+    status: getStatus(state)
+  }),
+  actions
+)(Timer)

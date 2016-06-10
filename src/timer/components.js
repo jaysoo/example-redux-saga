@@ -1,37 +1,31 @@
-import React from 'react';
-import { getFormattedTime } from './utils';
+import React, { PropTypes } from 'react'
 
-export const Timer = (
-    { start
-    , stop
-    , reset
-    , state
-    }
-  ) => (
-    <div>
-      <p>
-        { getFormattedTime(state) } ({ state.status })
-      </p>
-      <button
-        disabled={state.status === 'Running'}
-        onClick={() => reset()}>
-        Reset
-      </button>
-      <button
-        disabled={state.status === 'Running'}
-        onClick={() => start()}>
-        Start
-      </button>
-      <button
-        disabled={state.status === 'Stopped'}
-        onClick={stop}>
-        Stop
-      </button>
-    </div>
-  );
+export const Timer = ({ start, stop, reset, time, status }) => (
+  <div>
+    <p>
+      { time } ({ status })
+    </p>
+    <button
+      disabled={status === 'Running'}
+      onClick={() => reset()}>
+      Reset
+    </button>
+    <button
+      disabled={status === 'Running'}
+      onClick={() => start()}>
+      Start
+    </button>
+    <button
+      disabled={status === 'Stopped'}
+      onClick={stop}>
+      Stop
+    </button>
+  </div>
+)
 
 Timer.propTypes = {
   start: React.PropTypes.func.isRequired,
   stop: React.PropTypes.func.isRequired,
-  state: React.PropTypes.object.isRequired
-};
+  status: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired
+}

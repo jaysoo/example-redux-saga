@@ -1,6 +1,6 @@
-export default { start: () => ({ type: 'START' })
-               , tick: () => ({ type: 'TICK' })
-               , stop: () => ({ type: 'STOP' })
-               , reset: () => ({ type: 'RESET' })
-               };
+/* Actions */
 
+export const start = () => ({ type: 'START' })
+export const tick = () => ({ type: 'TICK' })
+export const stop = () => ({ type: 'STOP' })
+export const reset = () => ({ type: 'RESET' })
