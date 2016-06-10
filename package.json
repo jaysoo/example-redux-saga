@@ -20,8 +20,10 @@
     "react-dom": "^0.14.5",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
+    "redux-observable": "^0.6.0",
     "redux-saga": "^0.10.5",
-    "reselect": "^2.5.1"
+    "reselect": "^2.5.1",
+    "rxjs": "^5.0.0-beta.8"
   },
   "devDependencies": {
     "babel-cli": "^6.3.17",
