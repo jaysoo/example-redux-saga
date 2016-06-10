@@ -38436,8 +38436,6 @@ _reactDom2.default.render(_react2.default.createElement(Root, null), document.ge
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-/* Actions */
-
 var start = exports.start = function start() {
   return { type: 'START' };
 };
@@ -38641,8 +38639,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var _marked = [runTimer].map(regeneratorRuntime.mark);
 
-var ONE_SECOND = 1000;
-
 // wait :: Number -> Promise
 var wait = function wait(ms) {
   return new Promise(function (resolve) {
@@ -38653,7 +38649,7 @@ var wait = function wait(ms) {
 };
 
 function runTimer() {
-  var channel, state;
+  var channel, winner;
   return regeneratorRuntime.wrap(function runTimer$(_context) {
     while (1) switch (_context.prev = _context.next) {
       case 0:
@@ -38669,50 +38665,49 @@ function runTimer() {
 
       case 5:
         if (!_context.sent) {
-          _context.next = 22;
+          _context.next = 20;
           break;
         }
 
       case 6:
         if (!true) {
-          _context.next = 20;
+          _context.next = 18;
           break;
         }
 
         _context.next = 9;
-        return (0, _effects.call)(wait, ONE_SECOND);
+        return (0, _effects.race)({
+          stopped: (0, _effects.take)('STOP'),
+          tick: (0, _effects.call)(wait, 1000)
+        });
 
       case 9:
-        _context.next = 11;
-        return (0, _effects.select)();
+        winner = _context.sent;
 
-      case 11:
-        state = _context.sent;
-
-        if (!(state.status === 'Running')) {
-          _context.next = 17;
+        if (winner.stopped) {
+          _context.next = 15;
           break;
         }
 
-        _context.next = 15;
+        _context.next = 13;
         return (0, _effects.put)(actions.tick());
 
-      case 15:
-        _context.next = 18;
+      case 13:
+        _context.next = 16;
         break;
 
-      case 17:
-        return _context.abrupt('break', 20);
+      case 15:
+        return _context.abrupt('break', 18);
 
-      case 18:
+      case 16:
         _context.next = 6;
         break;
 
-      case 20:
+      case 18:
         _context.next = 3;
         break;
 
-      case 22:
+      case 20:
       case 'end':
         return _context.stop();
     }
